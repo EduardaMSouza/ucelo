@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "projeto-jornada-mobile-collection",
+		"name": "Projeto Jornada Mobile API",
+		"description": "Collection completa da API de gerenciamento de projetos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Projeto",
+			"item": [
+				{
+					"name": "Listar todos os projetos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto"
+							]
+						},
+						"description": "Retorna uma lista com todos os projetos cadastrados"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar projeto por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID do projeto"
+								}
+							]
+						},
+						"description": "Retorna um projeto específico pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Criar projeto sem motorredutor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeProjeto\": \"Projeto Elevador 02\",\n    \"cnpjCliente\": \"12.345.678/0001-90\",\n    \"cpf_funcionario\": \"123.456.789-00\",\n    \"fileiras\": 4,\n    \"potenciaMotor\": 15.5,\n    \"rotacaoMotor\": 1500,\n    \"possuiMotorredutor\": \"NAO_POSSUI_MOTORREDUTOR\",\n    \"diametro\": 2.5,\n    \"altura\": 3.0,\n    \"densidade\": 7850,\n    \"rendimento\": 0.85,\n    \"fatorDeServico\": 1.25,\n    \"velocidade\": 1.5,\n    \"passo\": 0.05\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/sem-motorredutor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								"sem-motorredutor"
+							]
+						},
+						"description": "Cria um novo projeto sem motorredutor"
+					},
+					"response": []
+				},
+				{
+					"name": "Criar projeto com motorredutor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeProjeto\": \"Projeto Elevador 01\",\n    \"cnpjCliente\": \"12.345.678/0001-90\",\n    \"cpf_funcionario\": \"123.456.789-00\",\n    \"potenciaMotor\": 15.5,\n    \"rotacaoMotor\": 1500,\n    \"possuiMotorredutor\": \"POSSUI_MOTORREDUTOR\",\n    \"diametro\": 2.5,\n    \"rendimento\": 0.85,\n    \"fatorDeServico\": 1.25,\n    \"reducao\": 10.5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/com-motorredutor",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								"com-motorredutor"
+							]
+						},
+						"description": "Cria um novo projeto com motorredutor"
+					},
+					"response": []
+				},
+				{
+					"name": "Remover projeto",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID do projeto a ser removido"
+								}
+							]
+						},
+						"description": "Remove um projeto pelo seu ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar projeto sem motorredutor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeProjeto\": \"Projeto Elevador 02 Atualizado\",\n    \"cnpjCliente\": \"12.345.678/0001-90\",\n    \"cpf_funcionario\": \"123.456.789-00\",\n    \"fileiras\": 5,\n    \"potenciaMotor\": 18.0,\n    \"rotacaoMotor\": 1600,\n    \"possuiMotorredutor\": \"NAO_POSSUI_MOTORREDUTOR\",\n    \"diametro\": 2.8,\n    \"altura\": 3.5,\n    \"densidade\": 7850,\n    \"rendimento\": 0.88,\n    \"fatorDeServico\": 1.30,\n    \"velocidade\": 1.8,\n    \"passo\": 0.06\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/atualizar-sem-motorredutor/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								"atualizar-sem-motorredutor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID do projeto a ser atualizado"
+								}
+							]
+						},
+						"description": "Atualiza um projeto existente sem motorredutor"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar projeto com motorredutor",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nomeProjeto\": \"Projeto Elevador 01 Atualizado\",\n    \"cnpjCliente\": \"12.345.678/0001-90\",\n    \"cpf_funcionario\": \"123.456.789-00\",\n    \"potenciaMotor\": 18.0,\n    \"rotacaoMotor\": 1600,\n    \"possuiMotorredutor\": \"POSSUI_MOTORREDUTOR\",\n    \"diametro\": 2.8,\n    \"rendimento\": 0.88,\n    \"fatorDeServico\": 1.30,\n    \"reducao\": 12.0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/criar-projeto/atualizar-com-motorredutor/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"criar-projeto",
+								"atualizar-com-motorredutor",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID do projeto a ser atualizado"
+								}
+							]
+						},
+						"description": "Atualiza um projeto existente com motorredutor"
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints para gerenciamento de projetos"
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://10.5.0.2:8081",
+			"type": "string"
+		}
+	]
+}
+

@@ -18,49 +18,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
-  bool _isValidEmail(String email) {
-    final emailRegex = RegExp(
-      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-    );
-    return emailRegex.hasMatch(email);
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) return 'Por favor, digite sua senha';
-    if (value.length < 6) return 'A senha deve ter pelo menos 6 caracteres';
-    if (value.length > 50) return 'A senha deve ter no máximo 50 caracteres';
-    if (value.contains(' ')) return 'A senha não pode conter espaços';
-    return null;
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.isEmpty) return 'Por favor, digite seu e-mail';
-    final trimmedEmail = value.trim();
-    if (trimmedEmail.isEmpty) return 'Por favor, digite seu e-mail';
-    if (!trimmedEmail.contains('@')) return 'O e-mail deve conter @';
-    final parts = trimmedEmail.split('@');
-    if (parts.length != 2) return 'Formato de e-mail inválido';
-    if (parts[0].isEmpty) return 'O e-mail deve ter um nome antes do @';
-    if (parts[1].isEmpty || !parts[1].contains('.')) {
-      return 'O e-mail deve ter um domínio válido';
-    }
-    if (!_isValidEmail(trimmedEmail)) return 'Por favor, digite um e-mail válido';
-    if (trimmedEmail.length > 100) return 'O e-mail deve ter no máximo 100 caracteres';
-    return null;
-  }
-
   Future<void> _handleLogin() async {
-    if (!_formKey.currentState!.validate()) return;
-
     final email = _emailController.text.trim();
     final password = _passwordController.text;
-
-    final emailError = _validateEmail(email);
-    final passwordError = _validatePassword(password);
-    if (emailError != null || passwordError != null) {
-      _formKey.currentState!.validate();
-      return;
-    }
 
     setState(() => _isLoading = true);
 
@@ -71,17 +31,10 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) return;
 
       if (response.success) {
-        print('✅ Login mock bem-sucedido!');
-        print('Token: ${response.token}');
-        print('User ID: ${response.userId}');
-        print('Email: ${response.email}');
-
-        if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-          );
-        }
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -128,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Spacer(flex: 2),
+
+                  // Logo
                   Column(
                     children: [
                       Container(
@@ -157,31 +112,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   const Spacer(flex: 2),
+
+                  // Email
                   ValidatedTextField(
                     controller: _emailController,
                     hintText: 'Digite seu e-mail',
                     icon: Icons.email_outlined,
-                    validator: _validateEmail,
+                    validator: (_) => null, // <- sem validação
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    onChanged: (_) => _formKey.currentState?.validate(),
                   ),
 
                   const SizedBox(height: 20),
+
+                  // Password
                   ValidatedTextField(
                     controller: _passwordController,
                     hintText: 'Digite sua senha',
                     icon: Icons.lock_outline,
-                    validator: _validatePassword,
+                    validator: (_) => null, // <- sem validação
                     textInputAction: TextInputAction.done,
                     obscureText: true,
-                    onFieldSubmitted: (_) {
-                      if (_formKey.currentState!.validate()) _handleLogin();
-                    },
-                    onChanged: (_) => _formKey.currentState?.validate(),
+                    onFieldSubmitted: (_) => _handleLogin(),
                   ),
 
                   const SizedBox(height: 32),
+
                   SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -219,7 +175,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const CompanyRegisterScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const CompanyRegisterScreen(),
+                        ),
                       );
                     },
                     child: const Text(

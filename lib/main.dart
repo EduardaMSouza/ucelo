@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/projetos_list_screen.dart';
+import 'screens/projeto_form_screen.dart';
+import 'screens/projeto_detail_screen.dart';
 
 void main() {
   runApp(const UceloApp());
@@ -21,6 +24,7 @@ class UceloApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginScreen(),
         '/home': (context) => const HomeScreen(),
+        '/projetos': (context) => const ProjetosListScreen(),
       },
       debugShowCheckedModeBanner: false,
     );
