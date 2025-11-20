@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucelo/screens/home_screen.dart';
 import '../services/api_service.dart';
 import '../models/projeto_response.dart';
 import 'projeto_form_screen.dart';
@@ -147,6 +148,19 @@ class _ProjetosListScreenState extends State<ProjetosListScreen> {
                   ),
                 ],
               ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.business),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomeScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: const Icon(Icons.person),
