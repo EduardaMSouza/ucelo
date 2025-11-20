@@ -73,126 +73,105 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Spacer(flex: 2),
-
-                  // Logo
-                  Column(
-                    children: [
-                      Container(
-                        width: 80,
-                        height: 80,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Logo
+                    Column(
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.flutter_dash,
+                            size: 50,
+                            color: Color(0xFF4A90A4),
+                          ),
                         ),
-                        child: const Icon(
-                          Icons.flutter_dash,
-                          size: 50,
-                          color: Color(0xFF4A90A4),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Ucelo',
+                          style: TextStyle(
+                            fontSize: 36,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 2,
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      const Text(
-                        'Ucelo',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 2,
+                      ],
+                    ),
+
+                    const SizedBox(height: 40),
+
+                    // Email
+                    ValidatedTextField(
+                      controller: _emailController,
+                      hintText: 'Digite seu e-mail',
+                      icon: Icons.email_outlined,
+                      validator: (_) => null, // sem validação
+                      keyboardType: TextInputType.emailAddress,
+                      textInputAction: TextInputAction.next,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Password
+                    ValidatedTextField(
+                      controller: _passwordController,
+                      hintText: 'Digite sua senha',
+                      icon: Icons.lock_outline,
+                      validator: (_) => null, // sem validação
+                      textInputAction: TextInputAction.done,
+                      obscureText: true,
+                      onFieldSubmitted: (_) => _handleLogin(),
+                    ),
+
+                    const SizedBox(height: 32),
+
+                    // Botão Entrar
+                    SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: _isLoading ? null : _handleLogin,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF2C3E50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          elevation: 5,
                         ),
-                      ),
-                    ],
-                  ),
-
-                  const Spacer(flex: 2),
-
-                  // Email
-                  ValidatedTextField(
-                    controller: _emailController,
-                    hintText: 'Digite seu e-mail',
-                    icon: Icons.email_outlined,
-                    validator: (_) => null, // <- sem validação
-                    keyboardType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // Password
-                  ValidatedTextField(
-                    controller: _passwordController,
-                    hintText: 'Digite sua senha',
-                    icon: Icons.lock_outline,
-                    validator: (_) => null, // <- sem validação
-                    textInputAction: TextInputAction.done,
-                    obscureText: true,
-                    onFieldSubmitted: (_) => _handleLogin(),
-                  ),
-
-                  const SizedBox(height: 32),
-
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _handleLogin,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF2C3E50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        elevation: 5,
-                      ),
-                      child: _isLoading
-                          ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                        ),
-                      )
-                          : const Text(
-                        'Entrar',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                        child: _isLoading
+                            ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            valueColor:
+                            AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        )
+                            : const Text(
+                          'Entrar',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-
-                  const SizedBox(height: 24),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CompanyRegisterScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Não tem uma conta? Cadastre-se',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.white,
-                      ),
-                    ),
-                  ),
-
-                  const Spacer(flex: 3),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

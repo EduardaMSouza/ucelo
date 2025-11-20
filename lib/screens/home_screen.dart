@@ -132,16 +132,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 
                 const SizedBox(height: 16),
-                
-                const Text(
-                  'Gerencie suas empresas de forma fácil e rápida',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.white70,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                
+
                 const SizedBox(height: 60),
                 SizedBox(
                   width: double.infinity,
